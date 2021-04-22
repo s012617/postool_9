@@ -23,6 +23,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BaseView<LoginViewModel>(
       onModelReady: (model) async {
+        _accountController.text = '0001';
+        _passwordController.text = '4825';
+        _memberController.text = 'GB';
         var _checkToken = await TokenHelper().getToken();
         if (_checkToken != null) _pushToHomePage();
       },
@@ -55,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[              
+            children: <Widget>[
               SizedBox(height: 80),
               TextFormField(
                 onChanged: (value) => setState(() {}),
@@ -142,9 +145,9 @@ class _LoginPageState extends State<LoginPage> {
               RaisedButton(
                 color: Colors.red[900],
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: Text(                  
+                child: Text(
                   '登入',
-                  style: TextStyle(                  
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
                   ),
@@ -160,13 +163,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _loginPress() async {
-    _pushToHomePage();
-    // FocusScope.of(context).requestFocus(FocusNode());
-    // if (_formKey.currentState.validate()) {
-    //   await _model.login(_accountController.text, _passwordController.text,
-    //       _memberController.text, context);
-    //   if (_model.state == ViewState.DataFetched) 
-    // }
+    FocusScope.of(context).requestFocus(FocusNode());
+    if (_formKey.currentState.validate()) {
+      await _model.login(_accountController.text, _passwordController.text,
+          _memberController.text, context);
+      if (_model.state == ViewState.DataFetched) _pushToHomePage();
+    }
   }
 
   // Navigation

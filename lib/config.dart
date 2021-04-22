@@ -1,1 +1,1 @@
-String baseUrl(String uri) => 'http://newbuffalo.gbtech.com.tw$uri';
+String baseUrl(String uri) => 'http://newBuffalo1.gbtech.com.tw:8012$uri';
